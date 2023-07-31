@@ -9,7 +9,9 @@ from models.city import City
 from models.state import State
 
 
-@app_views.route("/states/<state_id>/cities", methods=["GET", "POST"], strict_slashes=False)
+@app_views.route(
+                 "/states/<state_id>/cities",
+                 methods=["GET", "POST"], strict_slashes=False)
 def get_cities(state_id):
     """return a JSON representation of cities by state"""
     state_by_id = storage.get(State, state_id)

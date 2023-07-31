@@ -10,7 +10,9 @@ from models.review import Review
 from models.user import User
 
 
-@app_views.route("/places/<place_id>/reviews", methods=["GET", "POST"], strict_slashes=False)
+@app_views.route(
+                 "/places/<place_id>/reviews",
+                 methods=["GET", "POST"], strict_slashes=False)
 def handle_reviews(place_id):
     """
         Method to return a JSON representation of all states
@@ -67,7 +69,8 @@ def handle_review_by_id(review_id):
         if put is None or type(put) != dict:
             return jsonify({'message': 'Not a JSON'}), 400
         for key, value in put.items():
-            if key not in ['id', 'created_id', 'updated_at', 'user_id', 'place_id']:
+            if key not in [
+                          'id', 'created_id', 'updated_at', 'user_id', 'place_id']:
                 setattr(review_by_id, key, value)
         storage.save()
         return jsonify(review_by_id.to_dict()), 200
